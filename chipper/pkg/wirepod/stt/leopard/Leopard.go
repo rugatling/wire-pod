@@ -8,8 +8,8 @@ import (
 	"sync"
 
 	leopard "github.com/Picovoice/leopard/binding/go/v2"
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	sr "github.com/kercre123/wire-pod/chipper/pkg/wirepod/speechrequest"
+	"github.com/rugatling/wire-pod/chipper/pkg/logger"
+	sr "github.com/rugatling/wire-pod/chipper/pkg/wirepod/speechrequest"
 )
 
 var BotNum int

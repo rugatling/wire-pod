@@ -8,10 +8,10 @@ import (
 	"strings"
 
 	pb "github.com/digital-dream-labs/api/go/chipperpb"
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	"github.com/kercre123/wire-pod/chipper/pkg/vars"
-	"github.com/kercre123/wire-pod/chipper/pkg/vtt"
-	sr "github.com/kercre123/wire-pod/chipper/pkg/wirepod/speechrequest"
+	"github.com/rugatling/wire-pod/chipper/pkg/logger"
+	"github.com/rugatling/wire-pod/chipper/pkg/vars"
+	"github.com/rugatling/wire-pod/chipper/pkg/vtt"
+	sr "github.com/rugatling/wire-pod/chipper/pkg/wirepod/speechrequest"
 	"github.com/pkg/errors"
 	"github.com/soundhound/houndify-sdk-go"
 )
@@ -123,17 +123,17 @@ func openaiRequest(transcribedText string) string {
 	} else {
 		sendString = defaultPrompt + sendString
 	}
-	logger.Println("Making request to OpenAI...")
-	url := "https://api.openai.com/v1/completions"
+	logger.Println("Making request to OpenproxyAI...")
+	url := "https://api.proxyapi.ru/openai/v1/chat/completions"
 	formData := `{
-"model": "gpt-3.5-turbo-instruct",
-"prompt": "` + sendString + `",
-"temperature": 0.9,
-"max_tokens": 256,
-"top_p": 1,
-"frequency_penalty": 0.2,
-"presence_penalty": 0
-}`
+		"model": "gpt-4o",
+		"prompt": "` + sendString + `",
+		"temperature": 0.9,
+		"max_tokens": 256,
+		"top_p": 1,
+		"frequency_penalty": 0.2,
+		"presence_penalty": 0.1
+		}`
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer([]byte(formData)))
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+strings.TrimSpace(vars.APIConfig.Knowledge.Key))
@@ -165,12 +165,13 @@ func openaiRequest(transcribedText string) string {
 	var openAIResponse openAIStruct
 	err = json.Unmarshal(body, &openAIResponse)
 	if err != nil || len(openAIResponse.Choices) == 0 {
-		logger.Println("OpenAI returned no response.")
+		logger.Println("OpenproxyAI returned no response.")
+		logger.Println(string(req))
 		logger.Println(string(body))
-		return "OpenAI returned no response."
+		return "Open proxyAI returned no response."
 	}
 	apiResponse := strings.TrimSpace(openAIResponse.Choices[0].Text)
-	logger.Println("OpenAI response: " + apiResponse)
+	logger.Println("OpenproxyAI response: " + apiResponse)
 	return apiResponse
 }
 

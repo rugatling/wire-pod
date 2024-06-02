@@ -21,8 +21,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	"github.com/kercre123/wire-pod/chipper/pkg/vars"
+	"github.com/rugatling/wire-pod/chipper/pkg/logger"
+	"github.com/rugatling/wire-pod/chipper/pkg/vars"
 )
 
 var URLPrefix string = "https://github.com/kercre123/vosk-models/raw/main/"

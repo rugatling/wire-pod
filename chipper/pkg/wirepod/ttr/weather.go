@@ -14,9 +14,9 @@ import (
 	"time"
 	"unicode"
 
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	"github.com/kercre123/wire-pod/chipper/pkg/vars"
-	lcztn "github.com/kercre123/wire-pod/chipper/pkg/wirepod/localization"
+	"github.com/rugatling/wire-pod/chipper/pkg/logger"
+	"github.com/rugatling/wire-pod/chipper/pkg/vars"
+	lcztn "github.com/rugatling/wire-pod/chipper/pkg/wirepod/localization"
 )
 
 /* TODO:

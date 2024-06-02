@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"github.com/asticode/go-asticoqui"
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	sr "github.com/kercre123/wire-pod/chipper/pkg/wirepod/speechrequest"
+	"github.com/rugatling/wire-pod/chipper/pkg/logger"
+	sr "github.com/rugatling/wire-pod/chipper/pkg/wirepod/speechrequest"
 )
 
 var Name string = "coqui"

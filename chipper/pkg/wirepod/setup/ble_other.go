@@ -3,7 +3,7 @@
 
 package botsetup
 
-import "github.com/kercre123/wire-pod/chipper/pkg/logger"
+import "github.com/rugatling/wire-pod/chipper/pkg/logger"
 
 func RegisterBLEAPI() {
 	logger.Println("BLE API is unregistered")

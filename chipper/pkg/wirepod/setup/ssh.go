@@ -11,8 +11,8 @@ import (
 	"time"
 
 	scp "github.com/bramvdbogaerde/go-scp"
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	"github.com/kercre123/wire-pod/chipper/pkg/vars"
+	"github.com/rugatling/wire-pod/chipper/pkg/logger"
+	"github.com/rugatling/wire-pod/chipper/pkg/vars"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -143,7 +143,7 @@ func SetupBotViaSSH(ip string, key []byte) error {
 				}
 			}
 		} else {
-			resp, _ := http.Get("https://github.com/kercre123/wire-pod/raw/main/vector-cloud/build/vic-cloud")
+			resp, _ := http.Get("https://github.com/rugatling/wire-pod/raw/main/vector-cloud/build/vic-cloud")
 			if err != nil {
 				return doErr(err, "transferring new vic-cloud")
 			}

@@ -3,10 +3,10 @@ package processreqs
 import (
 	"fmt"
 
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	"github.com/kercre123/wire-pod/chipper/pkg/vars"
-	sr "github.com/kercre123/wire-pod/chipper/pkg/wirepod/speechrequest"
-	ttr "github.com/kercre123/wire-pod/chipper/pkg/wirepod/ttr"
+	"github.com/rugatling/wire-pod/chipper/pkg/logger"
+	"github.com/rugatling/wire-pod/chipper/pkg/vars"
+	sr "github.com/rugatling/wire-pod/chipper/pkg/wirepod/speechrequest"
+	ttr "github.com/rugatling/wire-pod/chipper/pkg/wirepod/ttr"
 )
 
 // Server stores the config

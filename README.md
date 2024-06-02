@@ -6,11 +6,11 @@ It allows voice commands to work with any Vector 1.0 or 2.0 for no fee, includin
 
 ## Installation
 
-The installation guide exists on the wiki: [Installation guide](https://github.com/kercre123/wire-pod/wiki/Installation)
+The installation guide exists on the wiki: [Installation guide](https://github.com/rugatling/wire-pod/wiki/Installation)
 
 ## Wiki
 
-Check out the [wiki](https://github.com/kercre123/wire-pod/wiki) for more information on what wire-pod is, a guide on how to install wire-pod, troubleshooting, how to develop for it, and for some generally helpful tips.
+Check out the [wiki](https://github.com/rugatling/wire-pod/wiki) for more information on what wire-pod is, a guide on how to install wire-pod, troubleshooting, how to develop for it, and for some generally helpful tips.
 
 ## Donate
 

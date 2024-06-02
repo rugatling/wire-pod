@@ -12,8 +12,8 @@ import (
 
 	"github.com/go-audio/audio"
 	"github.com/go-audio/wav"
-	"github.com/kercre123/wire-pod/chipper/pkg/logger"
-	sr "github.com/kercre123/wire-pod/chipper/pkg/wirepod/speechrequest"
+	"github.com/rugatling/wire-pod/chipper/pkg/logger"
+	sr "github.com/rugatling/wire-pod/chipper/pkg/wirepod/speechrequest"
 	"github.com/orcaman/writerseeker"
 )
 
@@ -77,7 +77,7 @@ func newAudioIntBuffer(r io.Reader) (*audio.IntBuffer, error) {
 }
 
 func makeOpenAIReq(in []byte) string {
-	url := "https://api.openai.com/v1/audio/transcriptions"
+	url := "https://api.proxyapi.ru/openai/v1/audio/transcriptions"
 
 	buf := new(bytes.Buffer)
 	w := multipart.NewWriter(buf)

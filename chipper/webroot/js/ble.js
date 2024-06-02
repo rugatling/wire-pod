@@ -449,9 +449,9 @@ function DoAuth() {
           "Authentication failure. Try again in ~15 seconds. If it happens again, check the troubleshooting guide:"
         );
         m2 = document.createElement("a");
-        m2.text = "https://github.com/kercre123/wire-pod/wiki/Troubleshooting";
+        m2.text = "https://github.com/rugatling/wire-pod/wiki/Troubleshooting";
         m2.href =
-          "https://github.com/kercre123/wire-pod/wiki/Troubleshooting#error-logging-in-the-bot-is-likely-unable-to-communicate-with-your-wire-pod-instance";
+          "https://github.com/rugatling/wire-pod/wiki/Troubleshooting#error-logging-in-the-bot-is-likely-unable-to-communicate-with-your-wire-pod-instance";
         m2.target = "_blank";
         authEl.appendChild(document.createElement("br"));
         authEl.appendChild(m2);
