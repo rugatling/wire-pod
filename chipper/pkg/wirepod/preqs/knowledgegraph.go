@@ -166,7 +166,6 @@ func openaiRequest(transcribedText string) string {
 	err = json.Unmarshal(body, &openAIResponse)
 	if err != nil || len(openAIResponse.Choices) == 0 {
 		logger.Println("OpenproxyAI returned no response.")
-		logger.Println(string(req))
 		logger.Println(string(body))
 		return "Open proxyAI returned no response."
 	}
