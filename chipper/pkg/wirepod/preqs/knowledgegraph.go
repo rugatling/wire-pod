@@ -70,7 +70,7 @@ func houndifyKG(req sr.SpeechRequest) string {
 
 func togetherRequest(transcribedText string) string {
 	sendString := "You are a helpful robot called Vector. You will be given a question asked by a user and you must provide the best answer you can. It may not be punctuated or spelled correctly. Keep the answer concise yet informative. Here is the question: " + "\\" + "\"" + transcribedText + "\\" + "\"" + " , Answer: "
-	url := "https://api.together.xyz/inference"
+	url := "https://api.proxyapi.ru/openai/v1/chat/completions"
 	model := vars.APIConfig.Knowledge.Model
 	formData := `{
 "model": "` + model + `",
@@ -130,9 +130,7 @@ func openaiRequest(transcribedText string) string {
 		"prompt": "` + sendString + `",
 		"temperature": 0.9,
 		"max_tokens": 256,
-		"top_p": 1,
-		"frequency_penalty": 0.2,
-		"presence_penalty": 0.1
+		"top_p": 1
 		}`
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer([]byte(formData)))
 	req.Header.Set("Content-Type", "application/json")

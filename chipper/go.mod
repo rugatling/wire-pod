@@ -31,7 +31,7 @@ require (
 
 require (
 	github.com/Picovoice/leopard/binding/go/v2 v2.0.2
-	github.com/rugatling/go-openai v0.0.0-20240602200622-19edf07d0a97
+	
 )
 
 require (

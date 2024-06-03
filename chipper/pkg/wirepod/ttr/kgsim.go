@@ -134,7 +134,7 @@ func StreamingKGSim(req interface{}, esn string, transcribedText string) (string
 			vars.WriteConfigToDisk()
 		}
 		conf := openai.DefaultConfig(vars.APIConfig.Knowledge.Key)
-		conf.BaseURL = "https://api.together.xyz/v1"
+		conf.BaseURL = "https://api.proxyapi.ru/openai/v1"
 		c = openai.NewClientWithConfig(conf)
 	} else if vars.APIConfig.Knowledge.Provider == "openai" {
 		c = openai.NewClient(vars.APIConfig.Knowledge.Key)
