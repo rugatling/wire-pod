@@ -171,7 +171,7 @@ func openaiRequest(transcribedText string) string {
 		Choices []struct {
 			Index        int         `json:"index"`
 			message []struct {
-			Role 		 string 	 `json:"role"`
+			Role         string      `json:"role"`
 			Text         string      `json:"content"`
 			} `json:"message"`
 			Logprobs     interface{} `json:"logprobs"`
