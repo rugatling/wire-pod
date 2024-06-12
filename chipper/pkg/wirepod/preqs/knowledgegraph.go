@@ -170,7 +170,7 @@ func openaiRequest(transcribedText string) string {
 		Model   string `json:"model"`
 		Choices []struct {
 			Index        int         `json:"index"`
-			message struct {
+			Message [] struct {
 			Role         string      `json:"role"`
 			Text         string      `json:"content"`
 			} `json:"message"`
@@ -190,7 +190,7 @@ func openaiRequest(transcribedText string) string {
 		logger.Println(string(body))
 		return "Open proxyAI returned no response."
 	}
-	apiResponse := strings.TrimSpace(openAIResponse.Choices[0].Text)
+	apiResponse := strings.TrimSpace(openAIResponse.Message[0].Text)
 	logger.Println("OpenproxyAI response: " + apiResponse)
 	return apiResponse
 }
