@@ -169,9 +169,9 @@ func openaiRequest(transcribedText string) string {
 		Object  string `json:"object"`
 		Created int    `json:"created"`
 		Model   string `json:"model"`
-		Choices []struct {
+		Choices [4]struct {
 			Index        int         `json:"index"`
-			Message   []struct {
+			Message   [2]struct {
 				Role    string       `json:"role"`
 				Content string       `json:"content"`
 			} `json:"message"`
@@ -185,16 +185,14 @@ func openaiRequest(transcribedText string) string {
 		} `json:"usage"`
 	}
 	
-	
-
 	var openAIResponse openAIStruct
 	err = json.Unmarshal(body, &openAIResponse)
 	if err != nil || len(openAIResponse.Choices) == 0 {
-		logger.Println("OpenproxyAI returned no response.")
+		logger.Println("Open proxyAI returned no response.")
 		logger.Println(string(body))
 		return "Open proxyAI returned no response."
 	}
-	apiResponse := strings.TrimSpace(openAIResponse.Choices[0].Message[0].Content)
+	apiResponse := strings.TrimSpace(openAIResponse.Choices[1].Message[1].Content)
 	logger.Println("OpenproxyAI response: " + apiResponse)
 	return apiResponse
 }
