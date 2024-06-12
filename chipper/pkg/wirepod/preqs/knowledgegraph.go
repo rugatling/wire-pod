@@ -172,7 +172,7 @@ func openaiRequest(transcribedText string) string {
 			Index        int         `json:"index"`
 			Message [] struct {
 			Role         string      `json:"role"`
-			Text         string      `json:"content"`
+			Content      string      `json:"content"`
 			} `json:"message"`
 			Logprobs     interface{} `json:"logprobs"`
 			FinishReason string      `json:"finish_reason"`
@@ -183,6 +183,7 @@ func openaiRequest(transcribedText string) string {
 			TotalTokens      int `json:"total_tokens"`
 		} `json:"usage"`
 	}
+	
 	var openAIResponse openAIStruct
 	err = json.Unmarshal(body, &openAIResponse)
 	if err != nil || len(openAIResponse.Choices) == 0 {
@@ -190,7 +191,7 @@ func openaiRequest(transcribedText string) string {
 		logger.Println(string(body))
 		return "Open proxyAI returned no response."
 	}
-	apiResponse := strings.TrimSpace(openAIResponse.Message[0].Text)
+	apiResponse := strings.TrimSpace(openAIResponse.Choices.Message[0].Content)
 	logger.Println("OpenproxyAI response: " + apiResponse)
 	return apiResponse
 }
