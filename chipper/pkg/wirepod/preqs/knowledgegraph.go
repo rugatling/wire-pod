@@ -69,17 +69,26 @@ func houndifyKG(req sr.SpeechRequest) string {
 }
 
 func togetherRequest(transcribedText string) string {
-	sendString := "You are a helpful robot called Vector. You will be given a question asked by a user and you must provide the best answer you can. It may not be punctuated or spelled correctly. Keep the answer concise yet informative. Here is the question: " + "\\" + "\"" + transcribedText + "\\" + "\"" + " , Answer: "
+	sendString := "You are a helpful robot called Vector. You will be given a question asked by a user and you must provide the best answer you can. It may not be punctuated or spelled correctly. Keep the answer concise yet informative. Here is the question:"
 	url := "https://api.proxyapi.ru/openai/v1/chat/completions"
 	model := vars.APIConfig.Knowledge.Model
 	formData := `{
 "model": "` + model + `",
-"prompt": "` + sendString + `",
+"messages": [
+	{
+	  "role": "system",
+	  "content": "` + sendString + `",
+	},
+	{
+	  "role": "user",
+	  "content": "`+ transcribedText +`"
+	}
+  ],
 "temperature": 0.7,
 "max_tokens": 256,
 "top_p": 1
 }`
-	logger.Println("Making request to Together API...")
+	logger.Println("Making request to PoxyAI API...")
 	logger.Println("Model is " + model)
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer([]byte(formData)))
 	req.Header.Set("Content-Type", "application/json")
@@ -100,9 +109,9 @@ func togetherRequest(transcribedText string) string {
 	choice := output["choices"].([]any)
 	for _, val := range choice {
 		x := val.(map[string]any)
-		textResponse := x["text"].(string)
+		textResponse := x["content"].(string)
 		apiResponse := strings.TrimSuffix(textResponse, "</s>")
-		logger.Println("Together response: " + apiResponse)
+		logger.Println("PoxyAI response: " + apiResponse)
 		return apiResponse
 	}
 	// In case text is not present in result from API, return a string saying answer was not found
@@ -117,7 +126,7 @@ func openaiRequest(transcribedText string) string {
 		robName = "Vector"
 	}
 	defaultPrompt := "You are a helpful robot called " + robName + ". You will be given a question asked by a user and you must provide the best answer you can. It may not be punctuated or spelled correctly as the STT model is small. The answer will be put through TTS, so it should be a speakable string. Keep the answer concise yet informative."
-	sendString := " Here is the question: " + "\\" + "\"" + transcribedText + "\\" + "\"" + " , Answer: "
+	sendString := " Here is the question: "
 	if strings.TrimSpace(vars.APIConfig.Knowledge.OpenAIPrompt) != "" {
 		sendString = strings.TrimSpace(vars.APIConfig.Knowledge.OpenAIPrompt) + sendString
 	} else {
@@ -126,11 +135,22 @@ func openaiRequest(transcribedText string) string {
 	logger.Println("Making request to OpenproxyAI...")
 	url := "https://api.proxyapi.ru/openai/v1/chat/completions"
 	formData := `{
-		"model": "gpt-4o",
-		"prompt": "` + sendString + `",
+		"model": "gpt-3.5-turbo-1106",
+		"messages": [
+	{
+	  "role": "system",
+	  "content": "` + sendString + `",
+	},
+	{
+	  "role": "user",
+	  "content": "`+ transcribedText +`"
+	}
+  ],
 		"temperature": 0.9,
 		"max_tokens": 256,
-		"top_p": 1
+		"top_p": 1,
+		"frequency_penalty": 0.2,
+		"presence_penalty": 0
 		}`
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer([]byte(formData)))
 	req.Header.Set("Content-Type", "application/json")
@@ -149,8 +169,11 @@ func openaiRequest(transcribedText string) string {
 		Created int    `json:"created"`
 		Model   string `json:"model"`
 		Choices []struct {
-			Text         string      `json:"text"`
 			Index        int         `json:"index"`
+			message []struct {
+			Role 		 string 	 `json:"role"`
+			Text         string      `json:"content"`
+			} `json:"message"`
 			Logprobs     interface{} `json:"logprobs"`
 			FinishReason string      `json:"finish_reason"`
 		} `json:"choices"`
