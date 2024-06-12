@@ -83,7 +83,7 @@ func togetherRequest(transcribedText string) string {
 	  "role": "user",
 	  "content": "`+ transcribedText +`"
 	}
-  ],
+    ],
 "temperature": 0.7,
 "max_tokens": 256,
 "top_p": 1
@@ -139,19 +139,20 @@ func openaiRequest(transcribedText string) string {
 		"messages": [
 	{
 	  "role": "system",
-	  "content": "` + sendString + `",
-	},
+	  "content": "` + sendString + `"
+	  },
 	{
 	  "role": "user",
 	  "content": "`+ transcribedText +`"
-	}
-  ],
+	  }
+	  ],
 		"temperature": 0.9,
 		"max_tokens": 256,
 		"top_p": 1,
 		"frequency_penalty": 0.2,
 		"presence_penalty": 0
 		}`
+		
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer([]byte(formData)))
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+strings.TrimSpace(vars.APIConfig.Knowledge.Key))
