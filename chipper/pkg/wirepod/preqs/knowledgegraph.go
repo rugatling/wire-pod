@@ -170,10 +170,7 @@ func openaiRequest(transcribedText string) string {
 		Model   string `json:"model"`
 		Choices []struct {
 			Index        int         `json:"index"`
-			Message [] struct {
-			Role         string      `json:"role"`
-			Content      string      `json:"content"`
-			} `json:"message"`
+			Message      Message     `json:"message"`
 			Logprobs     interface{} `json:"logprobs"`
 			FinishReason string      `json:"finish_reason"`
 		} `json:"choices"`
@@ -184,6 +181,15 @@ func openaiRequest(transcribedText string) string {
 		} `json:"usage"`
 	}
 	
+
+	type Message struct {
+		Role    string `json:"role"`
+		Content string `json:"content"`
+	}
+
+
+
+
 	var openAIResponse openAIStruct
 	err = json.Unmarshal(body, &openAIResponse)
 	if err != nil || len(openAIResponse.Choices) == 0 {
