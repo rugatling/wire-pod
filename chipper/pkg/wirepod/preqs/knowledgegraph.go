@@ -197,7 +197,7 @@ func openaiRequest(transcribedText string) string {
 		logger.Println(string(body))
 		return "Open proxyAI returned no response."
 	}
-	apiResponse := strings.TrimSpace(openAIResponse.Choices.Message[0].Content)
+	apiResponse := strings.TrimSpace(openAIResponse.Choices.Message.Content)
 	logger.Println("OpenproxyAI response: " + apiResponse)
 	return apiResponse
 }
