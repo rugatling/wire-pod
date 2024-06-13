@@ -77,7 +77,7 @@ func togetherRequest(transcribedText string) string {
 "messages": [
 	{
 	  "role": "system",
-	  "content": "` + sendString + `",
+	  "content": "` + sendString + `"
 	},
 	{
 	  "role": "user",
@@ -164,27 +164,30 @@ func openaiRequest(transcribedText string) string {
 	}
 	defer resp.Body.Close()
 	body, _ := io.ReadAll(resp.Body)
+
 	type openAIStruct struct {
 		ID      string `json:"id"`
 		Object  string `json:"object"`
 		Created int    `json:"created"`
 		Model   string `json:"model"`
-		Choices [4]struct {
-			Index        int         `json:"index"`
-			Message   [2]struct {
-				Role    string       `json:"role"`
-				Content string       `json:"content"`
-			} `json:"message"`
-			Logprobs     interface{} `json:"logprobs"`
-			FinishReason string      `json:"finish_reason"`
-		} `json:"choices"`
+		Choices []Choice `json:"choices"`
 		Usage struct {
 			PromptTokens     int `json:"prompt_tokens"`
 			CompletionTokens int `json:"completion_tokens"`
 			TotalTokens      int `json:"total_tokens"`
 		} `json:"usage"`
+		Fingerprint      string `json:"system_fingerprint"`
 	}
-	
+	type Choice struct {
+		Index        int     `json:"index"`
+		Message      Message `json:"message"`
+		FinishReason string  `json:"finish_reason"`
+	}
+	type Message struct {
+		Role    string `json:"role"`
+		Content string `json:"content"`
+	}
+
 	var openAIResponse openAIStruct
 	err = json.Unmarshal(body, &openAIResponse)
 	if err != nil || len(openAIResponse.Choices) == 0 {
@@ -195,6 +198,40 @@ func openaiRequest(transcribedText string) string {
 	apiResponse := strings.TrimSpace(openAIResponse.Choices[1].Message[1].Content)
 	logger.Println("OpenproxyAI response: " + apiResponse)
 	return apiResponse
+
+
+	//type openAIStruct struct {
+	//	ID      string `json:"id"`
+	//	Object  string `json:"object"`
+	//	Created int    `json:"created"`
+	//	Model   string `json:"model"`
+	//	Choices [4]struct {
+	//		Index        int         `json:"index"`
+	//		Message   [2]struct {
+	//			Role    string       `json:"role"`
+	//			Content string       `json:"content"`
+	//		} `json:"message"`
+	//		Logprobs     interface{} `json:"logprobs"`
+	//		FinishReason string      `json:"finish_reason"`
+	//	} `json:"choices"`
+	//	Usage struct {
+	//		PromptTokens     int `json:"prompt_tokens"`
+	//		CompletionTokens int `json:"completion_tokens"`
+	//		TotalTokens      int `json:"total_tokens"`
+	//	} `json:"usage"`
+	//	Fingerprint      string `json:"system_fingerprint"`
+	//}
+ //	var openAIResponse openAIStruct
+ //	err = json.Unmarshal(body, &openAIResponse)
+ //	if err != nil || len(openAIResponse.Choices) == 0 {
+ //		logger.Println("Open proxyAI returned no response.")
+ //		logger.Println(string(body))
+ //		return "Open proxyAI returned no response."
+ //	}
+ //	apiResponse := strings.TrimSpace(openAIResponse.Choices[1].Message[1].Content)
+ //	logger.Println("OpenproxyAI response: " + apiResponse)
+ //	return apiResponse
+
 }
 
 func openaiKG(speechReq sr.SpeechRequest) string {
