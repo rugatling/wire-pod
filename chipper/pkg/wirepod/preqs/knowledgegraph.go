@@ -222,7 +222,7 @@ func openaiRequest(transcribedText string) string {
 		Fingerprint      string `json:"system_fingerprint"`
 	}
  	var openAIResponse openAIStruct
- 	err := json.Unmarshal([]byte(body), &openAIResponse)
+ 	err = json.Unmarshal([]byte(body), &openAIResponse)
  	if err != nil || len(openAIResponse.Choices) == 0 {
  		logger.Println("Open proxyAI returned no response.")
  		logger.Println(string(body))
