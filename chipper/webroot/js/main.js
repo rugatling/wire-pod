@@ -674,6 +674,7 @@ function sendKGAPIKey() {
 
   if (provider == "openai") {
     key = document.getElementById("openAIKey").value;
+    model = document.getElementById("proxyapiModel").value;
     openAIPrompt = document.getElementById("openAIPrompt").value;
     if (document.getElementById("commandYes").checked == true) {
       doCommands = "true";
@@ -774,6 +775,7 @@ function updateKGAPI() {
       document.getElementById("kgProvider").value = obj.kgProvider;
       if (obj.kgProvider == "openai") {
         document.getElementById("openAIKey").value = obj.kgApiKey;
+        document.getElementById("proxyapiModel").value = obj.kgModel;
         document.getElementById("openAIPrompt").value = obj.kgOpenAIPrompt;
         if (obj.kgCommandsEnable == "true") {
           document.getElementById("commandYes").checked = true;

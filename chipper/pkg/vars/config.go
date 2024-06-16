@@ -123,6 +123,10 @@ func ReadConfig() {
 			logger.Println("Setting Together model to Llama3")
 			APIConfig.Knowledge.Model = "meta-llama/Llama-3-70b-chat-hf"
 		}
+		//if APIConfig.Knowledge.Model == "gpt-3.5-turbo" {
+		//	logger.Println("Setting Together model to gpt-3.5-turbo")
+		//	APIConfig.Knowledge.Model = "gpt-3.5-turbo"
+		//}
 
 		writeBytes, _ := json.Marshal(APIConfig)
 		os.WriteFile(ApiConfigPath, writeBytes, 0644)

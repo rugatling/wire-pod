@@ -202,6 +202,11 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 			logger.Println("Together model wasn't provided, using default meta-llama/Llama-3-70b-chat-hf")
 			vars.APIConfig.Knowledge.Model = "meta-llama/Llama-3-70b-chat-hf"
 		}
+		if kgModel == "" && kgProvider == "openai" {
+			logger.Println("ProxyAPI model wasn't provided, using default is gpt-3.5-turbo")
+			vars.APIConfig.Knowledge.Model = "gpt-3.5-turbo"
+		}
+		
 		if kgProvider == "openai" || kgProvider == "together" {
 			if strings.TrimSpace(r.FormValue("openai_prompt")) != "" {
 				vars.APIConfig.Knowledge.OpenAIPrompt = r.FormValue("openai_prompt")

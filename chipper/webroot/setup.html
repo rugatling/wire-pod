@@ -101,7 +101,7 @@
                 onchange="checkKG()"
               >
                 <option value="" selected>None</option>
-                <option value="openai">OpenAI</option>
+                <option value="openai">ProxyAPI</option>
                 <option value="houndify">Houndify</option>
                 <option value="together">Together</option></select
               ><br />
@@ -172,8 +172,22 @@
                 /><br /><br />
               </span>
               <span id="openAIInput" style="display: none">
-                <br />
-                <label for="openAIKey">OpenAI Key:</label>
+                <small
+                    >To use ProxyAPI, create an account at
+                    <a href="https://www.proxyapi.ru">proxyapi.ru</a>, 
+                    and enter the Model Name and Proxyapi Key
+                    here.</small
+                  ><br />
+                  <label for="proxyapiModel"
+                    >ProxyAPI Model Name: (leave blank for default:
+                    gpt-3.5-turbo)</label
+                  >
+                  <input
+                    type="text"
+                    name="proxyapiModel"ProxyAPI Model Name:
+                    id="proxyapiModel"
+                  /><br />
+                <label for="openAIKey">ProxyAPI Key:</label>
                 <input type="text" name="openAIKey" id="openAIKey" /><br />
                 <label for="openAIPrompt"
                   >GPT Prompt (leave blank for default):</label

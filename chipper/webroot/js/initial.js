@@ -104,7 +104,8 @@ function initKGAPIKey() {
 
   if (provider == "openai") {
     key = document.getElementById("openAIKey").value;
-    openAIPrompt = document.getElementById("openAIPrompt").value;
+    model = document.getElementById("proxyapiModel").value;
+    openAIPrompt = document.getElementById("openAIPrompt").value;    
     if (document.getElementById("commandYes").checked == true) {
       doCommands = "true";
     } else {
